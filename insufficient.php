@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SORRY, BALANCE NOT ENOUGH.</title>
+    <title>Insufficient Balance</title>
     <style>
         /* General Page Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             margin: 30px;
             background-color: #f7f7f7;
         }
@@ -24,6 +24,8 @@
             font-size: 18px;
             margin: 20px;
             color: red; /* Change color for emphasis */
+            font-weight: bold;
+    
         }
 
         /* Back Button Styling */
@@ -46,7 +48,7 @@
     </style>
 </head>
 <body>
-    <h1>SORRY, BALANCE NOT ENOUGH</h1>
+    <h1>Insufficient Balance</h1>
     <div class="message">
         <?php
         // Get the total amount and cash given from the URL
@@ -67,5 +69,4 @@
     <a href="index.php" class="back-button">Back to Menu</a>
 </body>
 </html>
-
 
