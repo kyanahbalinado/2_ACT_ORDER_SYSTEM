@@ -1,30 +1,57 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MENU Order Form</title>
+    <title>Order System</title>
     <style>
-        /* General Page Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             margin: 30px;
             background-color: #f7f7f7;
         }
-
         h1 {
             text-align: center;
             font-size: 24px;
             color: #333;
         }
-
-        /* Table Styling */
+        form {
+            text-align: center;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+        label, select, input {
+            margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
         table {
-            width: 40%;
+            width: 50%;
             margin: 20px auto;
             border-collapse: collapse;
-            border: 1px solid #000;
             background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         th, td {
             padding: 10px;
@@ -36,113 +63,47 @@
             background-color: #f2f2f2;
             font-weight: bold;
         }
-
-        /* Form Styling */
-        form {
-            width: 40%;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #000;
-            background-color: #fff;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-            font-size: 16px;
-            color: #333;
-        }
-        select, input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #000;
-            border-radius: 4px;
-            font-size: 16px;
-            box-sizing: border-box; /* Ensures padding is inside the input width */
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-
-        /* Center Aligning the Form and Table */
-        .container {
-            width: 50%;
-            margin: auto;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>MENU</MENU></h1>
-        <table>
-            <tr>
-                <th>Order</th>
-                <th>Amount</th>
-            </tr>
-            <tr>
-                <td>Burger</td>
-                <td>50</td>
-            </tr>
-            <tr>
-                <td>Fries</td>
-                <td>75</td>
-            </tr>
-            <tr>
-                <td>Steak</td>
-                <td>150</td>
-            </tr>
-        </table>
+    <h1>Order System - Balinado </h1>
+    
+    <h2 style="text-align:center;">MENU</MENU></h2>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <td>Burger</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Fries</td>
+            <td>75</td>
+        </tr>
+        <tr>
+            <td>Steak</td>
+            <td>150</td>
+        </tr>
+    </table>
 
-        <form method="POST" action="receipt.php">
-            <label for="order">Select an order</label>
-            <select name="order" id="order" onchange="updateTotal()">
-                <option value="Burger" data-price="50">Burger</option>
-                <option value="Fries" data-price="75">Fries</option>
-                <option value="Steak" data-price="150">Steak</option>
-            </select>
-
-            <label for="quantity">Quantity</label>
-            <input type="number" name="quantity" id="quantity" required min="1" oninput="updateTotal()">
-
-            <input type="hidden" name="totalAmount" id="totalAmount">
-
-            <label for="cash">Cash</label>
-            <input type="number" name="cash" id="cash" required>
-
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-
-    <script>
-        function updateTotal() {
-            const orderSelect = document.getElementById('order');
-            const quantityInput = document.getElementById('quantity');
-            const totalAmountInput = document.getElementById('totalAmount');
-
-            // Get the selected order price
-            const selectedOption = orderSelect.options[orderSelect.selectedIndex];
-            const price = selectedOption.getAttribute('data-price');
-
-            // Calculate total amount
-            const totalAmount = price * quantityInput.value;
-
-            // Update totalAmount input
-            totalAmountInput.value = totalAmount;
-        }
-    </script>
+    <form method="post" action="receipt.php">
+        <label for="order">Select Order:</label>
+        <select name="order" id="order" required>
+            <option value="Burger">Burger</option>
+            <option value="Fries">Fries</option>
+            <option value="Steak">Steak</option>
+        </select>
+        <br><br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" id="quantity" min="1" required>
+        <br><br>
+        <label for="cash">Cash Given:</label>
+        <input type="number" name="cash" id="cash" min="0" step="0.01" required>
+        <br><br>
+        <button type="submit">Submit Order</button>
+    </form>
 </body>
 </html>
-
 
